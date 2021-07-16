@@ -41,7 +41,9 @@ public class RobotContainer {
     DriverTwoFunctions();
   }
   private void AddAutoCommands(){
-    autoChooser.setDefaultOption("Shoot, Move", new Autonomous_ShootMove(drive, indexer, shooter, turret));  
+    autoChooser.setDefaultOption("Move", new Autonomous_Move(drive, indexer, shooter, turret));  
+    autoChooser.addOption("Manual Shoot, Move", new Autonomous_ManualShootMove(drive, indexer, shooter, turret)); 
+    autoChooser.addOption("Shoot, Move", new Autonomous_ShootMove(drive, indexer, shooter, turret));  
     autoChooser.addOption("Shoot, Push, Move", new Autonomous_ShootPushMove(drive, indexer, shooter, turret));  
     autoChooser.addOption("Shoot, Move & Collect & Shoot", new Autonomous_ShootMoveCollectMoveShoot(drive, indexer, shooter, turret, intake, arm));
     SmartDashboard.putData("Autonomous", autoChooser);
