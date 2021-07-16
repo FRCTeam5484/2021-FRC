@@ -34,7 +34,7 @@ public class Autonomous_ManualShootMove extends CommandBase {
 
   @Override
   public void execute() {
-    turret.Manual();
+    shooter.Manual();    
     indexer.Forward();
     drive.SimpleMove(0.3);
   }

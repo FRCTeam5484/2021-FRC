@@ -63,12 +63,6 @@ public class subTurret extends SubsystemBase {
     return (Math.abs(LimeLight.Parameters.MAX_TURRET * (limelight.GetTX() * LimeLight.Parameters.STEER_K)) > .06) ? false : true;
   }
 
-  public void Manual() {
-    turretMode = "Manual";
-    turretMotor.set(.8 * TurretSystem.TurretMaxSpeed);
-    
-  }
-
   public void Stop() {
     turretMotor.set(0);
   }

@@ -148,4 +148,7 @@ public class subShooter extends SubsystemBase {
     shooterLeftMasterMotor.set(0);
     ShooterReady = false;
   }
+  public void Manual() {
+    shooterLeftMasterMotor.set(.8);
+  }
 }
