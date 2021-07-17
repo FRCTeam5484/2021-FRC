@@ -87,6 +87,10 @@ public class RobotContainer {
       .whileHeld(new cmdAuto_ShootManualFeed(shooter, turret));
     new JoystickButton(driverTwo, Button.kA.value)
       .whileHeld(new cmdTurret_AutoAlign(turret));
+    new JoystickButton(driverTwo, Button.kY.value)
+      .whileHeld(new cmdShooter_AutoSpinToRPM(4320, shooter));
+      new JoystickButton(driverTwo, Button.kB.value)
+      .whileHeld(new cmdShooter_AutoSpinToRPM(3530, shooter));
     new JoystickButton(driverTwo, Button.kStart.value)
       .whileHeld(new cmdAuto_UnjamShooter(shooter, indexer));
   }  

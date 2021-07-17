@@ -104,14 +104,33 @@ public class subShooter extends SubsystemBase {
     limelight.SwitchToTargetingMode();
     if (limelight.HasValidTarget()) {
       double rpm = 0;
-      if(Calculate.isBetween(limelight.GetTY(), -15.0, -9.99)){ rpm = 4320; } // Behind Wheel
+      if(Calculate.isBetween(limelight.GetTY(), -15.0, -9.99)){ rpm = 4800; } // Behind Wheel
       else if(Calculate.isBetween(limelight.GetTY(), -10.0, -5)) { rpm = 3500; }
-      else if(Calculate.isBetween(limelight.GetTY(), -5.0, 13)){ rpm = 3500; }
+      else if(Calculate.isBetween(limelight.GetTY(), -5.0, 13)){ rpm = 3400; }
       else { rpm = 4800; }
       shooterPIDController.setReference(rpm, ControlType.kVelocity);
       ShooterReady = Calculate.isBetween(shooterLeftEncoder.getVelocity(), (rpm-100), (rpm+100));
     }
     else{ Stop(); ShooterReady = false; }
+  }
+  public void Auto(int rpm){
+    double p = SmartDashboard.getNumber("Shooter P Gain", 0);
+    double i = SmartDashboard.getNumber("Shooter I Gain", 0);
+    double d = SmartDashboard.getNumber("Shooter D Gain", 0);
+    double iz = SmartDashboard.getNumber("Shooter I Zone", 0);
+    double ff = SmartDashboard.getNumber("Shooter Feed Forward", 0);
+    double max = SmartDashboard.getNumber("Shooter Max Output", 0);
+    double min = SmartDashboard.getNumber("Shooter Min Output", 0);
+
+    if((p != kP)) { shooterPIDController.setP(p); kP = p; }
+    if((i != kI)) { shooterPIDController.setI(i); kI = i; }
+    if((d != kD)) { shooterPIDController.setD(d); kD = d; }
+    if((iz != kIz)) { shooterPIDController.setIZone(iz); kIz = iz; }
+    if((ff != kFF)) { shooterPIDController.setFF(ff); kFF = ff; }
+    if((max != kMaxOutput) || (min != kMinOutput)) { shooterPIDController.setOutputRange(min, max); kMinOutput = min; kMaxOutput = max; }
+    
+    shooterMode = "Auto";
+    shooterPIDController.setReference(rpm, ControlType.kVelocity);
   }
   public void SpinToRPM(){
     double p = SmartDashboard.getNumber("Shooter P Gain", 0);
