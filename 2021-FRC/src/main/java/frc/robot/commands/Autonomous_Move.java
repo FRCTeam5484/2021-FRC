@@ -34,12 +34,7 @@ public class Autonomous_Move extends CommandBase {
 
   @Override
   public void execute() {
-    if(time.get() < 3){
-      drive.SimpleMove(0.3);
-    }
-    else{
-      drive.SimpleMove(0);
-    }   
+      drive.SimpleMove(-0.3);   
   }
 
   // Called once the command ends or is interrupted.

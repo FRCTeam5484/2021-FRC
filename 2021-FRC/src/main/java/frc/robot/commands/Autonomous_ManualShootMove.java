@@ -36,7 +36,7 @@ public class Autonomous_ManualShootMove extends CommandBase {
   public void execute() {
     shooter.Manual();    
     indexer.Forward();
-    drive.SimpleMove(0.3);
+    drive.SimpleMove(-0.3);
   }
 
   // Called once the command ends or is interrupted.

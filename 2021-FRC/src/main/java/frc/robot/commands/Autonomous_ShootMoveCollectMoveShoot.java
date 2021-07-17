@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.subArm;
 import frc.robot.subsystems.subDrive;
 import frc.robot.subsystems.subIndexer;
 import frc.robot.subsystems.subIntake;
@@ -15,21 +14,18 @@ public class Autonomous_ShootMoveCollectMoveShoot extends CommandBase {
   subShooter shooter;
   subTurret turret;
   subIntake intake;
-  subArm arm;
   Timer time;
-  public Autonomous_ShootMoveCollectMoveShoot(subDrive _drive, subIndexer _indexer, subShooter _shooter, subTurret _turret, subIntake _intake, subArm _arm) {
+  public Autonomous_ShootMoveCollectMoveShoot(subDrive _drive, subIndexer _indexer, subShooter _shooter, subTurret _turret, subIntake _intake) {
     drive = _drive;
     indexer = _indexer;
     shooter = _shooter;
     turret = _turret;
     intake = _intake;
-    arm = _arm;
     addRequirements(drive);
     addRequirements(indexer);
     addRequirements(shooter);
     addRequirements(turret);
     addRequirements(intake);
-    addRequirements(arm);
   }
 
   @Override
@@ -49,7 +45,6 @@ public class Autonomous_ShootMoveCollectMoveShoot extends CommandBase {
         indexer.Forward();
       }
     }
-    arm.LowerArm();
     intake.Collect();
     if(time.get() > 4){
       drive.SimpleMove(0.48);

@@ -104,13 +104,10 @@ public class subShooter extends SubsystemBase {
     limelight.SwitchToTargetingMode();
     if (limelight.HasValidTarget()) {
       double rpm = 0;
-      if(Calculate.isBetween(limelight.GetTY(), -6, -4.5)){ rpm = 4500; } // Behind Wheel
-      else if(Calculate.isBetween(limelight.GetTY(), -4.5, -2)){ rpm = 4000; }
-      else if(Calculate.isBetween(limelight.GetTY(), -2, 0.8)){ rpm = 3700; }
-      else if(Calculate.isBetween(limelight.GetTY(), 0.8, 1.8)){ rpm = 3600; }
-      else if(Calculate.isBetween(limelight.GetTY(), 1.8, 4)){ rpm = 3800; }
-      else if(Calculate.isBetween(limelight.GetTY(), 4, 9)){ rpm = 3800; }
-      else if(Calculate.isBetween(limelight.GetTY(), 9, 14)){ rpm = 4000; } // Intiation Line
+      if(Calculate.isBetween(limelight.GetTY(), -15.0, -9.99)){ rpm = 4320; } // Behind Wheel
+      else if(Calculate.isBetween(limelight.GetTY(), -10.0, -5)) { rpm = 3500; }
+      else if(Calculate.isBetween(limelight.GetTY(), -5.0, 13)){ rpm = 3500; }
+      else { rpm = 4800; }
       shooterPIDController.setReference(rpm, ControlType.kVelocity);
       ShooterReady = Calculate.isBetween(shooterLeftEncoder.getVelocity(), (rpm-100), (rpm+100));
     }

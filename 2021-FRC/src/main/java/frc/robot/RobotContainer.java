@@ -28,7 +28,6 @@ public class RobotContainer {
   public final subDrive drive = new subDrive();
   public final subIndexer indexer = new subIndexer();
   public final subIntake intake = new subIntake();
-  public final subArm arm = new subArm();
   public final subShooter shooter = new subShooter(limelight);
   public final subTurret turret = new subTurret(limelight);
   public final subClimb climb = new subClimb();
@@ -45,7 +44,7 @@ public class RobotContainer {
     autoChooser.addOption("Manual Shoot, Move", new Autonomous_ManualShootMove(drive, indexer, shooter, turret)); 
     autoChooser.addOption("Shoot, Move", new Autonomous_ShootMove(drive, indexer, shooter, turret));  
     autoChooser.addOption("Shoot, Push, Move", new Autonomous_ShootPushMove(drive, indexer, shooter, turret));  
-    autoChooser.addOption("Shoot, Move & Collect & Shoot", new Autonomous_ShootMoveCollectMoveShoot(drive, indexer, shooter, turret, intake, arm));
+    autoChooser.addOption("Shoot, Move & Collect & Shoot", new Autonomous_ShootMoveCollectMoveShoot(drive, indexer, shooter, turret, intake));
     SmartDashboard.putData("Autonomous", autoChooser);
   }
   private void DriverOneFunctions() {    
@@ -62,12 +61,6 @@ public class RobotContainer {
     // Drive
     new JoystickButton(driverOne, Button.kB.value)
       .whileHeld(new cmdDrive_LockDrive(drive));
-
-    // Arm
-    new JoystickButton(driverOne, Button.kBumperLeft.value)
-      .whileHeld(new cmdArm_Raise(arm));
-    new JoystickButton(driverOne, Button.kBumperRight.value)
-      .whileHeld(new cmdArm_Lower(arm));
 
     // Testing
     new JoystickButton(driverOne, Button.kX.value)
@@ -91,7 +84,7 @@ public class RobotContainer {
 
     // Shooter
     new JoystickButton(driverTwo, Button.kBumperRight.value)
-      .whileHeld(new cmdAuto_Shoot(shooter, indexer, turret));
+      .whileHeld(new cmdAuto_ShootManualFeed(shooter, turret));
     new JoystickButton(driverTwo, Button.kA.value)
       .whileHeld(new cmdTurret_AutoAlign(turret));
     new JoystickButton(driverTwo, Button.kStart.value)
